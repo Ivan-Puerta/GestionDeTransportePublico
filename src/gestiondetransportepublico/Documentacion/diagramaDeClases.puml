@@ -1,0 +1,159 @@
+@startuml
+class Ruta{
+    - codigoRuta: int
+    - nombreRuta: String
+    - puntoOrigen: String
+    - puntoDestino: String
+    - paradas: List<String>
+    - kilometrajeTotal: double
+    - tiempoEstimadoMin: int
+    - tipoServicio: TipoServicio
+    - vehiculos: List<Vehiculo>
+}
+
+class Conductor{
+    - idConductor: int
+    - nombre: String
+    - pApellido: String
+    - sApellido: String
+    - numLicencia: String
+    - categoriaLicencia: CategoriaLicencia
+    - fechaVencimientoLicencia: LocalDate
+    - turnoAsignado: TurnoAsignado
+    - rutasAsignadas: List<String>
+}
+
+class Horario{
+    - codigoHorario: int
+    - rutaAsignada: Ruta
+    - horarioSalida:  String
+    - horaEstimadaLlegada: String
+    - frecuenciaServicio: String
+    - diasDeOperacion: List<DiasDeOperacion>
+}
+
+class Boleto{
+    - numBoleto: int
+    - rutaAsociada: Ruta
+    - horarioAsociado: Horario
+    - tipoBoleto: TipoBoleto
+    - precioBoleto: double
+    - metodoPago: MetodoPago
+    - estadoBoleto: EstadoBoleto
+}
+
+class Pasajero{
+    - idPasajero: int
+    - nombreCompleto: String
+    - numTarjetaTransporte: String
+    - historialViajes: List<Viaje>
+    - saldoEnTarjeta: double
+}
+
+class Incidente{
+    - codigoIncidente: int
+    - vehiculoInvolucrado: String
+    - conductorInvolucrado: String
+    - fecha: LocalDate
+    - hora: String
+    - descripcion: String
+    - accionesTomadas: AccionesTomadas
+}
+
+class Vehiculo{
+    - idVehiculo: int
+    - numPlaca: String
+    - marca: String
+    - modelo: String
+    - capacidadPasajeros: int
+    - kilometrajeActual: double
+    - estadoVehiculo: EstadoVehiculo
+    - fechaUltimaRevisionTecnica: LocalDate
+    - rutas: List<Ruta>
+}
+
+class Viaje {
+  - idViaje: int
+  - fecha: LocalDate
+  - horaSalida: LocalTime
+  - horaLlegada: LocalTime
+}
+
+enum TipoServicio{
+    URBANO
+    INTERURBANO
+    EXPRESO
+    NOCTURNO
+}
+
+enum EstadoVehiculo{
+    OPERATIVO
+    MANTENIMIENTO
+    FUERA_DE_SERVICIO
+}
+
+enum TurnoAsignado{
+    MANANA
+    TARDE
+    NOCHE
+}
+
+enum DiasDeOperacion{
+    LUNES
+    MARTES
+    MIERCOLES
+    JUEVES
+    VIERNES
+    SABADO
+    DOMINGO
+}
+
+enum TipoBoleto{
+    NORMAL
+    ESTUDIANTE
+    TERCERA_EDAD
+    ESPECIAL
+}
+
+enum MetodoPago{
+    EFECTIVO
+    TARJETA
+    PREPAGO
+}
+
+enum EstadoBoleto{
+    USADO
+    PENDIENTE
+    CANCELADO
+}
+
+enum AccionesTomadas{
+    REVISION_MECANICA
+    CAMBIO_DE_CONDUCTOR
+    CANCELACION_DE_VIAJE
+}
+
+enum CategoriaLicencia{
+    A1
+    A2
+    B1
+    B2
+    B3
+    C1
+    C2
+    C3
+}
+
+Ruta "*" -- "*" Vehiculo: Asignado >
+Horario "1" -- "1" Ruta: Tiene <
+Ruta "1" -- "*" Viaje : tiene >
+Horario "1" -- "*" Viaje : programado como >
+Vehiculo "1" -- "*" Viaje : asignado a >
+Conductor "1" -- "*" Viaje : conduce >
+Boleto "*" -- "1" Viaje : para >
+Pasajero "*" -- "*" Viaje: Viaja >
+Incidente "*" -- "1" Vehiculo:  Asociado <
+Incidente "*" -- "1" Conductor: Tubo <
+
+
+@enduml
