@@ -2,8 +2,8 @@
 class Ruta{
     - codigoRuta: int
     - nombreRuta: String
-    - puntoOrigen: String
-    - puntoDestino: String
+    - puntoOrigen: Parada
+    - puntoDestino: Parada
     - paradasIntermedias: List<Parada>
     - kilometrajeTotal: double
     - tiempoEstimadoMin: int

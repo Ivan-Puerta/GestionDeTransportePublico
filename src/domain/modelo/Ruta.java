@@ -15,34 +15,33 @@ public class Ruta {
     
     private int codigoRuta;
     private String nombreRuta;
-    private String puntoOrigen;
-    private String puntoDestino;
-    private List<String> paradas;
+    private Parada puntoOrigen;
+    private Parada puntoDestino;
+    private List<Parada> paradasIntermedias;
     private double kilometrajeTotal;
     private int tiempoEstimadoMin;
     private TipoServicio tipoServicio;
-    private List<Vehiculo> vehiculos;
-    private List<Viaje> viajes;
-    private Horario horario;
+    private List<Horario> horarios;
     
 //contructores
-    
-    public Ruta(int codigoRuta, String nombreRuta, String puntoOrigen, 
-            String puntoDestino, List<String> paradas, double kilometrajeTotal, 
-            int tiempoEstimadoMin, TipoServicio tipoServicio, 
-            List<Vehiculo> vehiculos, List<Viaje> viajes, Horario horario) {
+
+    public Ruta(int codigoRuta, String nombreRuta, Parada puntoOrigen, 
+            Parada puntoDestino, List<Parada> paradasIntermedias,
+            double kilometrajeTotal, int tiempoEstimadoMin, 
+            TipoServicio tipoServicio, List<Horario> horarios) {
+        
         this.codigoRuta = codigoRuta;
         this.nombreRuta = nombreRuta;
         this.puntoOrigen = puntoOrigen;
         this.puntoDestino = puntoDestino;
-        this.paradas = paradas;
+        this.paradasIntermedias = paradasIntermedias;
         this.kilometrajeTotal = kilometrajeTotal;
         this.tiempoEstimadoMin = tiempoEstimadoMin;
         this.tipoServicio = tipoServicio;
-        this.vehiculos = vehiculos;
-        this.viajes = viajes;
-        this.horario = horario;
+        this.horarios = horarios;
     }
+    
+
 
 
 
@@ -50,23 +49,6 @@ public class Ruta {
     }
 
     // getters y setters
-    
-    public Horario getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-    
-
-    public List<Viaje> getViajes() {
-        return viajes;
-    }
-
-    public void setViajes(List<Viaje> viajes) {
-        this.viajes = viajes;
-    }
 
     public int getCodigoRuta() {
         return codigoRuta;
@@ -84,28 +66,28 @@ public class Ruta {
         this.nombreRuta = nombreRuta;
     }
 
-    public String getPuntoOrigen() {
+    public Parada getPuntoOrigen() {
         return puntoOrigen;
     }
 
-    public void setPuntoOrigen(String puntoOrigen) {
+    public void setPuntoOrigen(Parada puntoOrigen) {
         this.puntoOrigen = puntoOrigen;
     }
 
-    public String getPuntoDestino() {
+    public Parada getPuntoDestino() {
         return puntoDestino;
     }
 
-    public void setPuntoDestino(String puntoDestino) {
+    public void setPuntoDestino(Parada puntoDestino) {
         this.puntoDestino = puntoDestino;
     }
 
-    public List<String> getParadas() {
-        return paradas;
+    public List<Parada> getParadasIntermedias() {
+        return paradasIntermedias;
     }
 
-    public void setParadas(List<String> paradas) {
-        this.paradas = paradas;
+    public void setParadasIntermedias(List<Parada> paradasIntermedias) {
+        this.paradasIntermedias = paradasIntermedias;
     }
 
     public double getKilometrajeTotal() {
@@ -132,13 +114,15 @@ public class Ruta {
         this.tipoServicio = tipoServicio;
     }
 
-    public List<Vehiculo> getVehiculos() {
-        return vehiculos;
+    public List<Horario> getHorarios() {
+        return horarios;
     }
 
-    public void setVehiculos(List<Vehiculo> vehiculos) {
-        this.vehiculos = vehiculos;
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
     }
+    
+
 
     // hash y equals
     
@@ -165,21 +149,18 @@ public class Ruta {
     }
 
     // toString
-    
+
     @Override
     public String toString() {
-        return "Ruta{" + "codigoRuta=" + codigoRuta 
-                + ", nombreRuta=" + nombreRuta 
-                + ", puntoOrigen=" + puntoOrigen 
-                + ", puntoDestino=" + puntoDestino 
-                + ", paradas=" + paradas 
+        return "Ruta{" + "codigoRuta=" + codigoRuta + ", nombreRuta=" + nombreRuta 
+                + ", puntoOrigen=" + puntoOrigen + ", puntoDestino=" + puntoDestino 
+                + ", paradasIntermedias=" + paradasIntermedias 
                 + ", kilometrajeTotal=" + kilometrajeTotal 
                 + ", tiempoEstimadoMin=" + tiempoEstimadoMin 
-                + ", tipoServicio=" + tipoServicio 
-                + ", vehiculos=" + vehiculos 
-                + ", viajes=" + viajes 
-                + ", horario=" + horario + '}';
+                + ", tipoServicio=" + tipoServicio + ", horarios=" + horarios + '}';
     }
+    
+
 
 
     
