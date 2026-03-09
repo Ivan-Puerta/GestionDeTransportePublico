@@ -4,7 +4,7 @@ class Ruta{
     - nombreRuta: String
     - puntoOrigen: String
     - puntoDestino: String
-    - paradasIntermedias: List<Paradas>
+    - paradasIntermedias: List<Parada>
     - kilometrajeTotal: double
     - tiempoEstimadoMin: int
     - tipoServicio: TipoServicio
@@ -39,8 +39,6 @@ class BoletoTarifa{
     - precioBoleto: double
     - pago: Pago
     - estadoBoleto: EstadoBoleto
-    - numTarjetaTransporte: String
-    - saldoEnTarjeta: double
 }
 
 class Pasajero{
@@ -48,7 +46,7 @@ class Pasajero{
     - nombre: String
     - pApellido: String
     - aApellido: String
-    - historialViajes: List<Viaje>
+    - boletos: List<BoletoTarifa>
 }
 
 class IncidentesMantenimiento{
@@ -75,7 +73,7 @@ class Viaje {
     - idViaje: int
     - vehiculo: Vehiculo
     - ruta: Ruta
-    - boleto: List<Boleto>
+    - boleto: List<BoletoTarifa>
     - conductor: Conductor
     - incidente: Incidente
 }
@@ -84,14 +82,13 @@ class Parada {
     - idParada: int
     - nombreParada: String
     - ubicacion: String
-    - rutas: List<Ruta>
 
 }
 
 abstract class Pago {
     - idPago: int
     - monto: double
-    - fechaPago: LocalDate
+    - fechaPago: LocalDateTime
 }
 
 class PagoEfectivo {
@@ -174,7 +171,7 @@ Viaje "*" -- "1" Vehiculo
 Viaje "1" -- "1" IncidentesMantenimiento
 Viaje "*" -- "1" Conductor
 BoletoTarifa "*" -- "1" Viaje
-Pasajero "1" -- "1" BoletoTarifa
+Pasajero "1" -- "*" BoletoTarifa
 BoletoTarifa "1" -- "1" Pago
 Pago  --> PagoEfectivo
 Pago  --> PagoTarjeta
