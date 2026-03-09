@@ -1,4 +1,4 @@
-package gestiondetransportepublico.Constantes;
+package domain.enums;
 
 /**
  *

@@ -2,10 +2,10 @@
  * Click nbfs;//nbhost/SystemFileSystem/Templates/Licenses/licenseprivatedefault.txt to change this license
  * Click nbfs;//nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package gestiondetransportepublico.Modelo.Entidades;
+package domain.modelo;
 
-import gestiondetransportepublico.Constantes.CategoriaLicencia;
-import gestiondetransportepublico.Constantes.TurnoAsignado;
+import domain.enums.CategoriaLicencia;
+import domain.enums.TurnoAsignado;
 import java.time.LocalDate;
 import java.util.List;
 

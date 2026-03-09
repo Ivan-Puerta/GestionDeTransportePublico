@@ -2,8 +2,9 @@
  * Click nbfs;//nbhost/SystemFileSystem/Templates/Licenses/licenseprivatedefault.txt to change this license
  * Click nbfs;//nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package gestiondetransportepublico.Modelo.Entidades;
+package domain.modelo;
 
+import domain.modelo.Boleto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
