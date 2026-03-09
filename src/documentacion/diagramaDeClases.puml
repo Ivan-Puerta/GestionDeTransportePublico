@@ -4,11 +4,11 @@ class Ruta{
     - nombreRuta: String
     - puntoOrigen: String
     - puntoDestino: String
-    - paradas: List<String>
+    - paradasIntermedias: List<Paradas>
     - kilometrajeTotal: double
     - tiempoEstimadoMin: int
     - tipoServicio: TipoServicio
-    - vehiculos: List<Vehiculo>
+    - horarios: List<Horario>
 }
 
 class Conductor{
@@ -20,42 +20,42 @@ class Conductor{
     - categoriaLicencia: CategoriaLicencia
     - fechaVencimientoLicencia: LocalDate
     - turnoAsignado: TurnoAsignado
-    - rutasAsignadas: List<String>
+    - rutasAsignadas: List<Ruta>
 }
 
 class Horario{
     - codigoHorario: int
     - rutaAsignada: Ruta
-    - horarioSalida:  String
-    - horaEstimadaLlegada: String
-    - frecuenciaServicio: String
+    - horaSalida: LocalTime
+    - frecuenciaSalidaMin: int
+    - duracionEstimadaMin: int
     - diasDeOperacion: List<DiasDeOperacion>
 }
 
-class Boleto{
+class BoletoTarifa{
     - numBoleto: int
-    - rutaAsociada: Ruta
-    - horarioAsociado: Horario
+    - viajeAsociado: Viaje
     - tipoBoleto: TipoBoleto
     - precioBoleto: double
-    - metodoPago: MetodoPago
+    - pago: Pago
     - estadoBoleto: EstadoBoleto
+    - numTarjetaTransporte: String
+    - saldoEnTarjeta: double
 }
 
 class Pasajero{
     - idPasajero: int
-    - nombreCompleto: String
-    - numTarjetaTransporte: String
+    - nombre: String
+    - pApellido: String
+    - aApellido: String
     - historialViajes: List<Viaje>
-    - saldoEnTarjeta: double
 }
 
-class Incidente{
+class IncidentesMantenimiento{
     - codigoIncidente: int
-    - vehiculoInvolucrado: String
-    - conductorInvolucrado: String
-    - fecha: LocalDate
-    - hora: String
+    - vehiculoInvolucrado: Vehiculo
+    - conductorInvolucrado: Conductor
+    - fechaHora: LocalDateTime
     - descripcion: String
     - accionesTomadas: AccionesTomadas
 }
@@ -69,14 +69,42 @@ class Vehiculo{
     - kilometrajeActual: double
     - estadoVehiculo: EstadoVehiculo
     - fechaUltimaRevisionTecnica: LocalDate
-    - rutas: List<Ruta>
 }
 
 class Viaje {
-  - idViaje: int
-  - fecha: LocalDate
-  - horaSalida: LocalTime
-  - horaLlegada: LocalTime
+    - idViaje: int
+    - vehiculo: Vehiculo
+    - ruta: Ruta
+    - boleto: List<Boleto>
+    - conductor: Conductor
+    - incidente: Incidente
+}
+
+class Parada {
+    - idParada: int
+    - nombreParada: String
+    - ubicacion: String
+    - rutas: List<Ruta>
+
+}
+
+abstract class Pago {
+    - idPago: int
+    - monto: double
+    - fechaPago: LocalDate
+}
+
+class PagoEfectivo {
+    - montoRecibido: double
+}
+
+class PagoTarjeta {
+    - numeroTarjeta: String
+}
+
+class PagoPrepago {
+    - idTarjeta: String
+    - saldoDisponible: double
 }
 
 enum TipoServicio{
@@ -115,11 +143,6 @@ enum TipoBoleto{
     ESPECIAL
 }
 
-enum MetodoPago{
-    EFECTIVO
-    TARJETA
-    PREPAGO
-}
 
 enum EstadoBoleto{
     USADO
@@ -144,16 +167,18 @@ enum CategoriaLicencia{
     C3
 }
 
-Ruta "*" -- "*" Vehiculo: Asignado >
-Horario "1" -- "1" Ruta: Tiene <
-Ruta "1" -- "*" Viaje : tiene >
-Horario "1" -- "*" Viaje : programado como >
-Vehiculo "1" -- "*" Viaje : asignado a >
-Conductor "1" -- "*" Viaje : conduce >
-Boleto "*" -- "1" Viaje : para >
-Pasajero "*" -- "*" Viaje: Viaja >
-Incidente "*" -- "1" Vehiculo:  Asociado <
-Incidente "*" -- "1" Conductor: Tubo <
+Ruta "1" -- "*" Viaje
+Ruta "*" -- "*" Parada
+Ruta "1" -- "*" Horario
+Viaje "*" -- "1" Vehiculo
+Viaje "1" -- "1" IncidentesMantenimiento
+Viaje "*" -- "1" Conductor
+BoletoTarifa "*" -- "1" Viaje
+Pasajero "1" -- "1" BoletoTarifa
+BoletoTarifa "1" -- "1" Pago
+Pago  --> PagoEfectivo
+Pago  --> PagoTarjeta
+Pago  --> PagoPrepago
 
 
 @enduml

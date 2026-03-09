@@ -2,9 +2,9 @@
  * Click nbfs;//nbhost/SystemFileSystem/Templates/Licenses/licenseprivatedefault.txt to change this license
  * Click nbfs;//nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package gestiondetransportepublico.Modelo.Entidades;
+package domain.modelo;
 
-import gestiondetransportepublico.Constantes.AccionTomada;
+import domain.enums.AccionTomada;
 import java.time.LocalDate;
 
 /**
